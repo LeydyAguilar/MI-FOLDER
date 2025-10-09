@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portfolio de Lenguaje de Programacion II - Leydy Griselda Aguilar Ccopa">
+    <title>Portfolio - Lenguaje de Programacion II</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .course-title {
+            font-size: 2.5em;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: bold;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .info-card {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .info-label {
+            font-size: 0.9em;
+            color: #555;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .info-name {
+            font-size: 1.3em;
+            color: #2c3e50;
+            font-weight: bold;
+        }
+
+        .student-card {
+            background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
+            grid-column: 1 / -1;
+            padding: 25px;
+            text-align: center;
+        }
+
+        .student-card .info-name {
+            font-size: 1.5em;
+            color: #2c3e50;
+        }
+
+        .intro-section {
+            background: linear-gradient(135deg, #74b9ff 0%, #a29bfe 100%);
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 40px;
+            text-align: center;
+            color: white;
+        }
+
+        .intro-section h2 {
+            margin-bottom: 15px;
+            font-size: 1.8em;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+
+        .tema-section {
+            margin-bottom: 40px;
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-left: 6px solid #3498db;
+        }
+
+        .tema-section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .tema-title {
+            font-size: 1.8em;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #3498db;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .tema-icon {
+            font-size: 1.2em;
+        }
+
+        .tema-description {
+            color: #555;
+            margin-bottom: 25px;
+            font-size: 1em;
+            line-height: 1.6;
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 4px solid #3498db;
+        }
+
+        .trabajos-title {
+            font-size: 1.3em;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .lista-trabajos {
+            list-style: none;
+            padding: 0;
+            counter-reset: trabajo-counter;
+        }
+
+        .lista-trabajos li {
+            margin-bottom: 12px;
+            counter-increment: trabajo-counter;
+            position: relative;
+        }
+
+        .lista-trabajos li::before {
+            content: counter(trabajo-counter);
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #3498db;
+            color: white;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85em;
+            font-weight: bold;
+        }
+
+        .lista-trabajos a {
+            display: block;
+            padding: 15px 20px 15px 50px;
+            background: white;
+            color: #3498db;
+            text-decoration: none;
+            border-radius: 10px;
+            border-left: 5px solid #3498db;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .lista-trabajos a:hover {
+            background: #3498db;
+            color: white;
+            transform: translateX(10px);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 30px;
+            background: #ecf0f1;
+            border-radius: 10px;
+            color: #95a5a6;
+            font-style: italic;
+        }
+
+        .color-1 { border-left-color: #e74c3c; }
+        .color-1 .tema-title { border-bottom-color: #e74c3c; }
+        .color-1 .tema-description { border-left-color: #e74c3c; }
+        .color-1 .lista-trabajos li::before { background: #e74c3c; }
+        .color-1 .lista-trabajos a { border-left-color: #e74c3c; color: #e74c3c; }
+        .color-1 .lista-trabajos a:hover { background: #e74c3c; color: white; }
+
+        .color-2 { border-left-color: #f39c12; }
+        .color-2 .tema-title { border-bottom-color: #f39c12; }
+        .color-2 .tema-description { border-left-color: #f39c12; }
+        .color-2 .lista-trabajos li::before { background: #f39c12; }
+        .color-2 .lista-trabajos a { border-left-color: #f39c12; color: #f39c12; }
+        .color-2 .lista-trabajos a:hover { background: #f39c12; color: white; }
+
+        .color-3 { border-left-color: #2ecc71; }
+        .color-3 .tema-title { border-bottom-color: #2ecc71; }
+        .color-3 .tema-description { border-left-color: #2ecc71; }
+        .color-3 .lista-trabajos li::before { background: #2ecc71; }
+        .color-3 .lista-trabajos a { border-left-color: #2ecc71; color: #2ecc71; }
+        .color-3 .lista-trabajos a:hover { background: #2ecc71; color: white; }
+
+        .color-4 { border-left-color: #9b59b6; }
+        .color-4 .tema-title { border-bottom-color: #9b59b6; }
+        .color-4 .tema-description { border-left-color: #9b59b6; }
+        .color-4 .lista-trabajos li::before { background: #9b59b6; }
+        .color-4 .lista-trabajos a { border-left-color: #9b59b6; color: #9b59b6; }
+        .color-4 .lista-trabajos a:hover { background: #9b59b6; color: white; }
+
+        .color-5 { border-left-color: #1abc9c; }
+        .color-5 .tema-title { border-bottom-color: #1abc9c; }
+        .color-5 .tema-description { border-left-color: #1abc9c; }
+        .color-5 .lista-trabajos li::before { background: #1abc9c; }
+        .color-5 .lista-trabajos a { border-left-color: #1abc9c; color: #1abc9c; }
+        .color-5 .lista-trabajos a:hover { background: #1abc9c; color: white; }
+
+        .color-6 { border-left-color: #e91e63; }
+        .color-6 .tema-title { border-bottom-color: #e91e63; }
+        .color-6 .tema-description { border-left-color: #e91e63; }
+        .color-6 .lista-trabajos li::before { background: #e91e63; }
+        .color-6 .lista-trabajos a { border-left-color: #e91e63; color: #e91e63; }
+        .color-6 .lista-trabajos a:hover { background: #e91e63; color: white; }
+
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 2px solid #ecf0f1;
+            color: #7f8c8d;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            .course-title {
+                font-size: 1.8em;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .tema-title {
+                font-size: 1.4em;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1 class="course-title">LENGUAJE DE PROGRAMACION II</h1>
+            
+            <div class="info-grid">
+                <div class="info-card">
+                    <div class="info-label">DOCENTE</div>
+                    <div class="info-name">COYLA IDME LEONE</div>
+                </div>
+                
+                <div class="info-card student-card">
+                    <div class="info-label">ESTUDIANTE</div>
+                    <div class="info-name">LEYDY GRISELDA AGUILAR CCOPA</div>
+                </div>
+            </div>
+        </header>
+
+        <div class="intro-section">
+            <h2>Portfolio de Trabajos del Curso</h2>
+            <p>Repositorio de proyectos y ejercicios desarrollados organizados por temas</p>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number" id="totalTemas">6</div>
+                <div class="stat-label">Temas</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="totalTrabajos">18</div>
+                <div class="stat-label">Trabajos</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">100</div>
+                <div class="stat-label">Dedicacion</div>
+            </div>
+        </div>
+
+        <div class="tema-section color-1">
+            <h2 class="tema-title">
+                <span class="tema-icon">&#x1F500;</span>
+                ESTRUCTURA SELECTIVA
+            </h2>
+            <div class="tema-description">
+                Estructuras de control que permiten tomar decisiones en el programa mediante condiciones. 
+                Incluye if, if-else, else-if, switch-case y operador ternario para controlar el flujo de ejecucion.
+            </div>
+            <h3 class="trabajos-title">&#x1F4C1; Trabajos realizados</h3>
+            <ol class="lista-trabajos" id="trabajos-selectiva">
+                <li><a href="https://github.com/JobApaza14k/Portafolio_2.github.oi/blob/main/EJEMPLO_GITHUB/EJEMPLO_1.pdf" target="_blank">&#x1F4CA; EJEMPLO_1</a></li>
+                <li><a href="https://github.com/JobApaza14k/Portafolio_2.github.oi/blob/main/EJEMPLO_GITHUB/EJEMPLO_2.pdf" target="_blank">&#x1F3AF; EJEMPLO_2</a></li>
+                <li><a href="https://github.com/JobApaza14k/Portafolio_2.github.oi/blob/main/EJEMPLO_GITHUB/EJEMPLO_3.pdf" target="_blank">&#x1F522; EJEMPLO_3</a></li>
+            </ol>
+        </div>
+
+        <div class="tema-section color-2">
+            <h2 class="tema-title">
+                <span class="tema-icon">&#x1F504;</span>
+                ESTRUCTURA REPETITIVA
+            </h2>
+            <div class="tema-description">
+                Ciclos o bucles que permiten ejecutar un bloque de codigo multiples veces. 
+                Incluye for, while, do-while y tecnicas de iteracion para procesamiento eficiente de datos.
+            </div>
+            <h3 class="trabajos-title">&#x1F4C1; Trabajos realizados</h3>
+            <ol class="lista-trabajos" id="trabajos-repetitiva">
+                <li><a href="https://github.com/JobApaza14k/Portafolio_2.github.oi/blob/main/EJEMPLO_GITHUB/EJEMPLO_a1.pdf" target="_blank">&#x2716; EJEMPLO_1</a></li>
+                <li><a href="https://github.com/JobApaza14k/Portafolio_2.github.oi/blob/main/EJEMPLO_GITHUB/EJEMPLO_a2.pdf" target="_blank">&#x1F522; EJEMPLO_2</a></li>
+                <li><a href="https://github.com/JobApaza14k/Portafolio_2.github.oi/blob/main/EJEMPLO_GITHUB/EJEMPLO_a3.pdf" target="_blank">&#x1F300; EJEMPLO3</a></li>
+            </ol>
+        </div>
+
+        <div class="tema-section color-3">
+            <h2 class="tema-title">
+                <span class="tema-icon">&#x1F4E6;</span>
+                ENCAPSULAMIENTO
+            </h2>
+            <div class="tema-description">
+                Principio de POO que oculta los detalles internos de una clase y proporciona una interfaz publica. 
+                Incluye modificadores de acceso (private, public, protected), getters, setters y validacion de datos.
+            </div>
+            <h3 class="trabajos-title">&#x1F4C1; Trabajos realizados</h3>
+            <ol class="lista-trabajos" id="trabajos-encapsulamiento">
+                <li><a href="https://github.com/JobApaza14k/Portafolio_2.github.oi/blob/main/EJEMPLO_GITHUB/EJEMPLO_b1.pdf" target="_blank">&#x1F393; EJEMPLO_1</a></li>
+                <li><a href="https://github.com/JobApaza14k/Portafolio_2.github.oi/blob/main/EJEMPLO_GITHUB/EJEMPLO_b2.pdf" target="_blank">&#x1F3E6; EJEMPLO_2</a></li>
+                <li><a href="https://github.com/JobApaza14k/Portafolio_2.github.oi/blob/main/EJEMPLO_GITHUB/EJEMPLO_b3.pdf" target="_blank">&#x1F4F1; EJEMPLO_3</a></li>
+            </ol>
+        </div>
+
+        <div class="tema-section color-4">
+            <h2 class="tema-title">
+                <span class="tema-icon">&#x2699;</span>
+                METODOS Y SOBRECARGAS
+            </h2>
+            <div class="tema-description">
+                Funciones dentro de clases que definen el comportamiento de los objetos. La sobrecarga permite 
+                crear multiples metodos con el mismo nombre pero diferentes parametros (polimorfismo en tiempo de compilacion).
+            </div>
+            <h3 class="trabajos-title">&#x1F4C1; Trabajos realizados</h3>
+            <ol class="lista-trabajos" id="trabajos-metodos">
+                <li><a href="https://github.com/JobApaza14k/Portafolio_2.github.oi/blob/main/EJEMPLO_GITHUB/EJEMPLO_c1.pdf" target="_blank">&#x1F9EE; EJEMPLO_1</a></li>
+                <li><a href="https://github.com/JobApaza14k/Portafolio_2.github.oi/blob/main/EJEMPLO_GITHUB/EJEMPLO_c2.pdf" target="_blank">&#x1F4D0; EJEMPLO_2</a></li>
+                <li><a href="https://github.com/JobApaza14k/Portafolio_2.github.oi/blob/main/EJEMPLO_GITHUB/EJEMPLO_c3.pdf" target="_blank">&#x1F4B0; EJEMPLO_3</a></li>
+            </ol>
+        </div>
+
+        <div class="tema-section color-5">
+            <h2 class="tema-title">
+                <span class="tema-icon">&#x1F3D7;</span>
+                CONSTRUCTORES Y DESTRUCTORES
+            </h2>
+            <div class="tema-description">
+                Metodos especiales para inicializar y destruir objetos. Los constructores se ejecutan al crear un objeto, 
+                mientras que los destructores liberan recursos al destruirlo. Incluye constructores por defecto, parametrizados y de copia.
+            </div>
+            <h3 class="trabajos-title">&#x1F4C1; Trabajos realizados</h3>
+            <ol class="lista-trabajos" id="trabajos-constructores">
+                <li><a href="https://github.com/JobApaza14k/Portafolio_2.github.oi/blob/main/EJEMPLO_GITHUB/EJEMPLO_d1.pdf" target="_blank">&#x1F697; EJEMPLO_1</a></li>
+                <li><a href="https://github.com/JobApaza14k/Portafolio_2.github.oi/blob/main/EJEMPLO_GITHUB/EJEMPLO_d2.pdf" target="_blank">&#x1F4DA; EJEMPLO_2</a></li>
+                <li><a href="https://github.com/JobApaza14k/Portafolio_2.github.oi/blob/main/EJEMPLO_GITHUB/EJEMPLO_d3.pdf" target="_blank">&#x1F3E0; EJEMPLO_3</a></li>
+            </ol>
+        </div>
+
+        <div class="tema-section color-6">
+            <h2 class="tema-title">
+                <span class="tema-icon">&#x1F517;</span>
+                RELACIONES ENTRE CLASES
+            </h2>
+            <div class="tema-description">
+                Interacciones entre diferentes clases en POO. Incluye asociacion, agregacion, composicion y herencia. 
+                Permite modelar relaciones del mundo real: tiene un, es un, usa, contiene, etc.
+            </div>
+            <h3 class="trabajos-title">&#x1F4C1; Trabajos realizados</h3>
+            <ol class="lista-trabajos" id="trabajos-relaciones">
+                <li><a href="https://github.com/JobApaza14k/Portafolio_2.github.oi/blob/main/EJEMPLO_GITHUB/EJEMPLO_f1.pdf" target="_blank">&#x1F3EB; ejemplo_1</a></li>
+                <li><a href="https://github.com/JobApaza14k/Portafolio_2.github.oi/blob/main/EJEMPLO_GITHUB/EJEMPLO_f2.pdf" target="_blank">&#x1F699; EJEMPLO2</a></li>
+                <li><a href="https://github.com/JobApaza14k/Portafolio_2.github.oi/blob/main/EJEMPLO_GITHUB/EJEMPLO_f3.pdf" target="_blank">&#x1F465; EJEMPLO_3</a></li>
+            </ol>
+        </div>
+
+        <footer>
+            <p><strong>2024 - Lenguaje de Programacion II</strong></p>
+            <p style="margin-top: 10px;">Docente: COYLA IDME LEONE</p>
+            <p style="margin-top: 5px;">Estudiante: LEYDY GRISELDA AGUILAR CCOPA</p>
+            <p style="margin-top: 15px; font-size: 0.9em; color: #95a5a6;">
+                Contacto: leydy.aguilar@universidad.edu.pe
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        function actualizarContador() {
+            var selectiva = document.querySelectorAll('#trabajos-selectiva li').length;
+            var repetitiva = document.querySelectorAll('#trabajos-repetitiva li').length;
+            var encapsulamiento = document.querySelectorAll('#trabajos-encapsulamiento li').length;
+            var metodos = document.querySelectorAll('#trabajos-metodos li').length;
+            var constructores = document.querySelectorAll('#trabajos-constructores li').length;
+            var relaciones = document.querySelectorAll('#trabajos-relaciones li').length;
+            
+            var total = selectiva + repetitiva + encapsulamiento + metodos + constructores + relaciones;
+            document.getElementById('totalTrabajos').textContent = total;
+        }
+
+        window.addEventListener('load', actualizarContador);
+
+        document.addEventListener('DOMContentLoaded', function() {
+            var sections = document.querySelectorAll('.tema-section');
+            sections.forEach(function(section, index) {
+                section.style.opacity = '0';
+                section.style.transform = 'translateY(30px)';
+                
+                setTimeout(function() {
+                    section.style.transition = 'all 0.6s ease';
+                    section.style.opacity = '1';
+                    section.style.transform = 'translateY(0)';
+                }, index * 150);
+            });
+        });
+    </script>
+</body>
+</html>
